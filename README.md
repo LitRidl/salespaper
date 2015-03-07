@@ -4,12 +4,12 @@
 ## Инструкция
 1. git clone git@github.com:LitRidl/salespaper.git
 2. Установить Python и связанные утилиты:
-2.1. sudo apt-get install python-setuptools python-dev build-essential
-2.2. sudo easy_install pip
+  1. sudo apt-get install python-setuptools python-dev build-essential
+  2. sudo easy_install pip
 3. Установить веб-фреймворк Flask: pip install Flask
 4. Перейти в директорию и запустить сервер:
-4.1. cd salespaper
-4.2. python run.py
+  1. cd salespaper
+  2. python run.py
 5. Перейти в браузере на страницу http://localhost:5000/
 
 ## Исходная постановка задачи
