@@ -3,15 +3,20 @@
 from app import app
 import argparse
 
-app.config.from_object('config.DevelopmentConfig')
+DESCRIPTION = "Run-script & configuration chooser for Salespaper Flask application"
+DEFAULT_CONFIG_CLASS = "DevelopmentConfig"
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=DESCRIPTION)
 
-    parser.add_argument("--host", help="host", default=app.config['HOST'])
-    parser.add_argument("--port", help="port", type=int, default=app.config['PORT'])
-    parser.add_argument("--debug", help="debug", action='store_true', default=app.config['DEBUG'])
-
+    parser.add_argument("--config", "-c", help="Launch with configuration from CONFIG_CLASS in ./config.py",
+                        dest="config_class", type=str, default=DEFAULT_CONFIG_CLASS)
     args = parser.parse_args()
 
-    app.run(host=args.host, port=args.port, debug=args.debug)
+    try:
+        app.config.from_object('config.' + args.config_class)
+    except ImportError:
+        print "Configuration class " + args.config + " not found in ./config.py, aborting"
+        exit(1)
+
+    app.run()
