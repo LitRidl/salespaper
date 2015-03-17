@@ -6,7 +6,7 @@
 2. Установить Python и связанные утилиты:
   1. sudo apt-get install python-setuptools python-dev build-essential
   2. sudo easy_install pip
-3. Установить веб-фреймворк Flask: pip install Flask
+3. Разрешить python-зависимости: pip install dependencies.txt
 4. Перейти в директорию и запустить сервер:
   1. cd salespaper
   2. python run.py
