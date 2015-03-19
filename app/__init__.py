@@ -5,6 +5,9 @@ import wtforms_json
 
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import LoginManager
+
+from config import _basedir
 
 app = Flask(__name__, static_folder='../static', template_folder='../templates')
 
@@ -17,9 +20,18 @@ wtforms_json.init()
 # Create ORM session
 db = SQLAlchemy(app)
 
+# Login Manager
+login_manager = LoginManager()
+login_manager.init_app(app)
+# login_manager.login_view = 'users/login'
+
 ######################
 # Initialize modules #
 ######################
+
+# Jinja2 filters
+from filters import mod as JinjaFilters
+app.register_blueprint(JinjaFilters)
 
 # Users
 from app.users.views import mod as Users

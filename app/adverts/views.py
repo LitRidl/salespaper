@@ -16,3 +16,10 @@ mod = Blueprint('adverts', __name__, url_prefix='/adverts')
 def index():
     adverts = Advert.query.all()
     return render_template('adverts/index.html', title='Adverts', adverts=adverts)
+
+
+@mod.route('/<int:advert_id>')
+def show_advert(advert_id):
+    advert = Advert.query.get(advert_id)
+    return render_template('adverts/advert.html', advert=advert)
+

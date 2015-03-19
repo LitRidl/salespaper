@@ -28,6 +28,13 @@ def index():
     return render_template('index.html', title='Home', user=user, posts=posts)
 
 
+@mod.route('/<int:user_id>')
+def show_user(user_id):
+    user = User.query.get(user_id)
+    return render_template('users/user.html', user=user)
+
+
+
 @mod.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
