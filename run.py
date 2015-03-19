@@ -1,10 +1,10 @@
+#!env/bin/python
 # -*- coding: utf-8 -*-
 
-from app import app
+from app import app, DEFAULT_CONFIG_CLASS
 import argparse
 
 DESCRIPTION = "Run-script & configuration chooser for Salespaper Flask application"
-DEFAULT_CONFIG_CLASS = "DevelopmentConfig"
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=DESCRIPTION)
@@ -14,9 +14,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     try:
-        app.config.from_object('config.' + args.config_class)
+        pass # app.config.from_object('config.' + args.config_class)
     except ImportError:
         print "Configuration class " + args.config + " not found in ./config.py, aborting"
         exit(1)
 
-    app.run()
+    app.run(debug=app.config['DEBUG'], host=app.config['HOST'], port=app.config['PORT'])

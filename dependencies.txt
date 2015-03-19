@@ -3,8 +3,8 @@ Flask-Login==0.2.11
 Flask-OpenID
 Flask-Mail==0.9.0
 argparse==1.2.1
-SQLAlchemy==0.8.4
 Flask-SQLAlchemy==1.0
+SQLAlchemy-migrate==0.9.5
 Flask-WTF==0.9.4
 WTForms-JSON==0.2.5
 Flask-Babel==0.9

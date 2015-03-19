@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>All Adverts</h1>
+  {% for advert in adverts %}
+    <div>
+      <p>
+        {{advert.user.nickname}} says: <b>{{advert.body}}</b>
+      </p>
+    </div>
+  {% endfor %}
+{% endblock %}
