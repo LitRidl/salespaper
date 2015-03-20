@@ -6,10 +6,12 @@ import wtforms_json
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
+from flask.ext.bcrypt import Bcrypt
 
 from config import _basedir
 
 app = Flask(__name__, static_folder='../static', template_folder='../templates')
+bcrypt = Bcrypt(app)
 
 DEFAULT_CONFIG_CLASS = os.getenv('CONF', 'DevelopmentConfig')
 app.config.from_object('config.' + DEFAULT_CONFIG_CLASS)
