@@ -12,6 +12,8 @@ class Config(object):
     DEBUG = False
     TESTING = False
 
+    ROOT_DIR = _basedir
+
     CSRF_ENABLED = True
     CSRF_SESSION_KEY = "Ad125F930ez20C508dDq82l75c5E047r"
 
@@ -19,6 +21,10 @@ class Config(object):
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'salespaper.db')
     SQLALCHEMY_MIGRATE_REPO = os.path.join(_basedir, 'db_repository')
+
+    BABEL_DEFAULT_LOCALE = 'ru'
+    BABEL_DEFAULT_TIMEZONE = 'Europe/Moscow'
+
 
 
 class DevelopmentConfig(Config):
