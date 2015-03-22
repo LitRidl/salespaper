@@ -4,6 +4,7 @@ import os
 
 _basedir = os.path.abspath(os.path.dirname(__file__))
 
+
 class Config(object):
     PORT = 5000
     HOST = '127.0.0.1'
@@ -22,6 +23,11 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
+
+
+class UnitTestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'testing.db')
 
 
 class ProductionConfig(Config):
