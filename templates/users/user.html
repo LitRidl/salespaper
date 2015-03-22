@@ -3,9 +3,9 @@
 {% block content %}
   <div>
     {% if user %}
-      <p>{{user.nickname}} says:</p>
+      <p>{{ user.nickname }} says:</p>
       {% for advert in user.adverts %}
-        <p>At {{advert.timestamp | datetime("dd MMMM yyyy")}}: {{advert.body}}</p>
+        <p>At {{ advert.timestamp | datetime("dd MMMM yyyy") }}: {{ advert.body }}</p>
       {% endfor %}
     {% else %}
       <p>No such user :(</p>

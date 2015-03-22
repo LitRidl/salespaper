@@ -22,7 +22,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'salespaper.db')
     SQLALCHEMY_MIGRATE_REPO = os.path.join(_basedir, 'db_repository')
 
-    BABEL_DEFAULT_LOCALE = 'ru'
+    BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'Europe/Moscow'
 
 

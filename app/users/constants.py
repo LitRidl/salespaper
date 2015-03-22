@@ -4,10 +4,10 @@ USER = 0
 ADMIN = 1
 
 RULES = (
-    ('users:view', u'Просматривать пользователей'),
-    ('users:approve', u'(Де)активировать пользователей'),
-    ('users:edit', u'Редактировать пользователей'),
-    ('adverts:view', u'Просматривать объявления'),
-    ('adverts:approve', u'Подтверждать или закрывать объявления'),
-    ('adverts:edit', u'Редактировать объявления'),
+    ('users:view', u'View users'),
+    ('users:approve', u'(De)activate users'),
+    ('users:edit', u'Edit users'),
+    ('adverts:view', u'View adverts'),
+    ('adverts:approve', u'Accept/decline adverts'),
+    ('adverts:edit', u'Edit adverts'),
 )

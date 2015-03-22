@@ -3,7 +3,7 @@ from flask import Blueprint, request, render_template, flash, g, session, redire
 
 from app import db, bcrypt
 
-from app.users.forms import LoginForm
+from app.users.forms import LoginForm, RegisterForm
 from app.users.models import User
 from flask.ext.login import login_required, login_user, logout_user
 
@@ -32,19 +32,37 @@ def index():
 @login_required
 def show_user(user_id):
     user = User.query.get(user_id)
-    return render_template('users/user.html', title=user.nickname,  user=user)
+    title = 'No such user' if user is None else user.nickname
+    return render_template('users/user.html', title=title,  user=user)
+
+
+@mod.route('/register/', methods=['GET', 'POST'])   # pragma: no cover
+def register():
+    error = None
+    form = RegisterForm(request.form)
+
+    if form.validate_on_submit():
+        user = User(form.username.data, form.email.data, form.password.data, form.email.data)
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+        return redirect(url_for('home.home'))
+
+    return render_template('register.html', form=form, error=error)
 
 
 @mod.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
+    form = LoginForm(request.form)
 
-    form = LoginForm()  # request.form inside?
     if request.method == 'POST':
         if form.validate_on_submit():
-            user = User.query.filter_by(nickname=request.form['username']).first()
+            from pprint import pprint as p
+            p(form)
+            user = User.query.filter_by(nickname=form.username.data).first()
 
-            if user is not None and bcrypt.check_password_hash(user.password, request.form['password']):
+            if user is not None and bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user, remember=False)
                 return redirect(url_for('.show_user', user_id=2))
             else:
