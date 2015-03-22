@@ -22,6 +22,8 @@ class User(db.Model):
     locale = db.Column(db.String(10), default=app.config['BABEL_DEFAULT_LOCALE'])
     timezone = db.Column(db.String(100), default=app.config['BABEL_DEFAULT_TIMEZONE'])
 
+    # rules = db.Column(HSTORE, index=True)
+
     adverts = db.relationship('Advert', back_populates='user', lazy='select')
 
     def __init__(self, nickname, password, email, role=USER.USER):
