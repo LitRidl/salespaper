@@ -6,11 +6,12 @@
 2. Установить Python и связанные утилиты:
   1. sudo apt-get install python-setuptools python-dev build-essential
   2. sudo easy_install pip
-3. Разрешить python-зависимости: pip install dependencies.txt
-4. Перейти в директорию и запустить сервер:
-  1. cd salespaper
-  2. python run.py
-5. Перейти в браузере на страницу http://localhost:5000/
+  3. sudo pip install virtualenv
+3. Перейти в директорию проекта (cd salespaper)
+4. Создать виртуальное окружение: virtualenv env
+5. Разрешить python-зависимости: pip install dependencies.txt
+6. Запустить сервер: python run.py
+7. Перейти в браузере по адресу http://localhost:5000/
 
 ## Исходная постановка задачи
 Сайт купли-продажи авто:
