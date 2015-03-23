@@ -24,9 +24,16 @@ wtforms_json.init()
 # Create ORM session
 db = SQLAlchemy(app)
 
+
+class UserAnonymous(AnonymousUserMixin):
+    id = None
+    locale = app.config['BABEL_DEFAULT_LOCALE']
+    timezone = app.config['BABEL_DEFAULT_TIMEZONE']
+
 # Login Manager
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.anonymous_user = UserAnonymous
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'users.login'
 
@@ -77,10 +84,10 @@ def before_request():
 
 @app.after_request
 def after_request(response):
-    # if not current_user.is_anonymous():
-    #     current_user.last_req_date = datetime.utcnow()
-    #     db.session.add(current_user)
-    #     db.session.commit()
+    if not current_user.is_anonymous():
+        current_user.last_req_date = datetime.utcnow()
+        db.session.add(current_user)
+        db.session.commit()
     return response
 
 

@@ -1,6 +1,6 @@
 {% set navigation_bar = [
-  ('/adverts', 'adverts', 'Adverts'),
-  ('/users', 'users', 'Users')
+  (url_for('adverts.index'), 'adverts', 'Adverts'),
+  (url_for('users.index'), 'users', 'Users')
 ] -%}
 {% set active_page = active_page | default('adverts') -%}
 
@@ -35,7 +35,13 @@
             {% endfor %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ url_for('users.login') }}">Login</a></li>
+            <li>
+              {% if user.authenticated %}
+                <a href="{{ url_for('users.login') }}">Login</a>
+              {% else %}
+                <a href="{{ url_for('users.logout') }}">Logout</a>
+              {% endif %}
+            </li>
           </ul>
         </div>
       </div>
@@ -45,8 +51,12 @@
       {% block content %}{% endblock %}
 
       {# Errors #}
-      {% if error %}
-        <p class="bg-danger"><strong>Error:</strong> {{ error }}</p>
+      {% if errors %}
+        <div class="errors">
+          {% for error in errors %}
+            <p class="bg-danger"><strong>Error:</strong> {{ error }}</p>
+          {% endfor %}
+        </div>
       {% endif %}
 
       {# Messages #}
@@ -54,6 +64,6 @@
         <p class="bg-info">{{ message }}</p>
       {% endfor %}
     </div>
-    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
   </body>
 </html>

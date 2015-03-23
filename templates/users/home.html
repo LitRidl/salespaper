@@ -4,6 +4,11 @@
 {% block content %}
 
 <h1>Homepage</h1>
-<p>Content goes here</p>
+<div>
+  <p>Adverts:</p>
+  {% for advert in adverts %}
+    <p>At {{ advert.timestamp | datetime("dd MMMM yyyy") }}: {{ advert.body }}</p>
+  {% endfor %}
+</div>
 
 {% endblock %}

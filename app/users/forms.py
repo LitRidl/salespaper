@@ -11,7 +11,7 @@ class LoginForm(Form):
 
 
 class RegisterForm(Form):
-    username = TextField('username', validators=[Required(), Length(min=3, max=25)])
+    nickname = TextField('nickname', validators=[Required(), Length(min=3, max=25)])
     email = TextField('email', validators=[Required(), Email(message=None), Length(min=6, max=40)])
     password = PasswordField('password', validators=[Required(), Length(min=6, max=25)])
     confirm = PasswordField('Repeat password', validators=[
