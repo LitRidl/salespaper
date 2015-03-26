@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% set active_page = "adverts" %}
+
+{% block content %}
+  <h1>Create New Advert</h1>
+  <br/>
+
+  <form class="form-advert" role="form" method="post" action="">
+    {{ form.csrf_token }}
+
+    <div class="form-group">
+      <label for="">Title</label>
+      {{ form.title(class_="form-control", placeholder="Enter advert title") }}
+      {% if form.title.errors %}
+        <span class="error">
+          {% for error in form.title.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Comment</label>
+      {{ form.comment(class_="form-control", placeholder="Enter advert comment") }}
+      {% if form.comment.errors %}
+        <span class="error">
+          {% for error in form.comment.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <hr/>
+
+    <div class="form-group">
+      <label for="">Phone</label>
+      {{ form.phone(class_="form-control", placeholder="Enter contact phone") }}
+      {% if form.phone.errors %}
+        <span class="error">
+          {% for error in form.phone.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Place</label>
+      {{ form.place(class_="form-control", placeholder="Enter location") }}
+      {% if form.place.errors %}
+        <span class="error">
+          {% for error in form.place.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Advert closed?</label>
+      {{ form.closed(class_="form-control") }}
+      {% if form.closed.errors %}
+        <span class="error">
+          {% for error in form.closed.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <hr/>
+    <div class="form-group">
+      <label for="">Car Used</label>
+      {{ form.car_used(class_="form-control") }}
+      {% if form.car_used.errors %}
+        <span class="error">
+          {% for error in form.car_used.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Cost</label>
+      {{ form.car_cost(class_="form-control", placeholder="Enter advert's cost") }}
+      {% if form.car_cost.errors %}
+        <span class="error">
+          {% for error in form.car_cost.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Year</label>
+      {{ form.car_year(class_="form-control", placeholder="Enter car year") }}
+      {% if form.car_year.errors %}
+        <span class="error">
+          {% for error in form.car_year.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <hr/>
+    <div class="form-group">
+      <label for="">Car Mileage</label>
+      {{ form.car_mileage(class_="form-control", placeholder="Enter car mileage") }}
+      {% if form.car_mileage.errors %}
+        <span class="error">
+          {% for error in form.car_mileage.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Transmission</label>
+      {{ form.car_transmission(class_="form-control") }}
+      {% if form.car_transmission.errors %}
+        <span class="error">
+          {% for error in form.car_transmission.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Engine Power</label>
+      {{ form.car_engine_power(class_="form-control", placeholder="Enter car engine power (h.p.)") }}
+      {% if form.car_engine_power.errors %}
+        <span class="error">
+          {% for error in form.car_engine_power.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <hr/>
+    <div class="form-group">
+      <label for="">Car Engine Volume</label>
+      {{ form.car_engine_volume(class_="form-control", placeholder="Enter engine volume (cube meters)") }}
+      {% if form.car_engine_volume.errors %}
+        <span class="error">
+          {% for error in form.car_engine_volume.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Fuel Consumption</label>
+      {{ form.car_fuel_consumption(class_="form-control", placeholder="Enter fuel consumption (liters/100 km)") }}
+      {% if form.car_fuel_consumption.errors %}
+        <span class="error">
+          {% for error in form.car_fuel_consumption.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Drive</label>
+      {{ form.car_drive(class_="form-control") }}
+      {% if form.car_drive.errors %}
+        <span class="error">
+          {% for error in form.car_drive.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <button class="btn btn-success" type="submit">Create!</button>
+  </form>
+
+{% endblock %}

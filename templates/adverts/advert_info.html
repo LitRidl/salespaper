@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% set active_page = "adverts" %}
+
+{% block content %}
+  <div>
+    {% if advert %}
+      <h2>{{ advert.title | e}}</h2>
+      <p>
+          Contacts:
+          {% if current_user.is_authenticated() %}
+            {% if advert.phone %} {{ advert.phone | e}} {% endif %}
+            {# {% if advert.email %} {{ advert.email | e}} {% endif %} #}
+          {% else %}
+            <a href="{{ url_for('users.login') }}">Login</a> to see contacts
+          {% endif %}
+      </p>
+      <div class="car-details">
+        {% if advert.car_used %}
+          <p><b>Used:</b> advert.car_used</p>
+        {% endif %}
+        {% if advert.car_year %}
+          <p><b>Year:</b> advert.car_year</p>
+        {% endif %}
+        {% if advert.car_cost %}
+          <p><b>Cost:</b> advert.car_cost</p>
+        {% endif %}
+        {% if advert.car_mileage %}
+          <p><b>Mileage:</b> advert.car_mileage</p>
+        {% endif %}
+        {% if advert.car_transmission %}
+          <p><b>Transmission:</b> advert.car_transmission</p>
+        {% endif %}
+        {% if advert.car_engine_power %}
+          <p><b>Engine Power:</b> advert.car_engine_power</p>
+        {% endif %}
+        {% if advert.car_engine_volume %}
+          <p><b>Engine Volume:</b> advert.car_engine_volume</p>
+        {% endif %}
+        {% if advert.car_fuel_consumption %}
+          <p><b>Fuel consumption:</b> advert.car_fuel_consumption</p>
+        {% endif %}
+        {% if advert.car_drive %}
+          <p><b>Car drive:</b> advert.car_drive</p>
+        {% endif %}
+      </div>
+      <p>{{ advert.comment | e }}</p>
+    {% else %}
+      <h3 class="text-center">No such advert :(</h3>
+    {% endif %}
+  </div>
+{% endblock %}

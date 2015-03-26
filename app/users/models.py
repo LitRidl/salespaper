@@ -2,18 +2,19 @@
 from datetime import datetime
 
 from app import db, bcrypt, app
-import constants as USER
+import constants
 from sqlalchemy import event
+from decorators import admin_required
 
 
 class User(db.Model):
     __tablename__ = 'user'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nickname = db.Column(db.String(64), unique=True, nullable=False, index=True)
     password = db.Column(db.String(60), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    role = db.Column(db.SmallInteger, default=USER.USER, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False, index=True)
+    role = db.Column(db.Enum(*constants.ROLES), default='user', nullable=False)
 
     active = db.Column(db.Boolean, default=True, nullable=False)
 
@@ -26,7 +27,7 @@ class User(db.Model):
 
     adverts = db.relationship('Advert', back_populates='user', lazy='select')
 
-    def __init__(self, nickname, password, email, role=USER.USER):
+    def __init__(self, nickname, password, email, role='user'):
         self.nickname = nickname
         self.password = password
         self.email = email
@@ -41,11 +42,14 @@ class User(db.Model):
     def is_anonymous(self):
         return False
 
+    def is_admin(self):
+        return self.role is 'admin'
+
     def get_id(self):
         return unicode(self.id)
 
     def __repr__(self):
-        return '<User %r>' % (self.nickname)
+        return '<User %r>' % (self.nickname, )
 
 
 @event.listens_for(User.password, 'set', retval=True)

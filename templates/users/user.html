@@ -9,7 +9,7 @@
         <p>At {{ advert.timestamp | datetime("dd MMMM yyyy") }}: {{ advert.body }}</p>
       {% endfor %}
     {% else %}
-      <p>No such user :(</p>
+      <h3 class="text-center">No such user :(</h3>
     {% endif %}
   </div>
 {% endblock %}

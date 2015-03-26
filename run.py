@@ -14,7 +14,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     try:
-        pass # app.config.from_object('config.' + args.config_class)
+        pass  # app.config.from_object('config.' + args.config_class)
     except ImportError:
         print "Configuration class " + args.config + " not found in ./config.py, aborting"
         exit(1)
