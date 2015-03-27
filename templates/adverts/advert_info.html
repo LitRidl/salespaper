@@ -8,6 +8,12 @@
           {% if current_user.id == advert.user_id or current_user.is_admin() %}
             <a class="edit-link" href="{{ url_for('adverts.advert_edit', advert_id=advert.id) }}">[edit]</a>
           {% endif %}
+          {% if (current_user.id == advert.user_id or current_user.is_admin()) and not advert.closed %}
+            <a class="edit-link" href="{{ url_for('adverts.close_advert', advert_id=advert.id) }}">[close]</a>
+          {% endif %}
+          {% if (current_user.id == advert.user_id or current_user.is_admin()) and advert.approved %}
+            <a class="edit-link" href="{{ url_for('adverts.block_advert', advert_id=advert.id) }}">[block]</a>
+          {% endif %}
         </h2>
         <p class="contacts">
             <b>Contacts:</b>
@@ -22,16 +28,13 @@
         <div class="row">
           <div class="col-xs-6">
             <h3>Comment</h3><br/>
-            <div class="text-nointervals">{{ advert.comment | e | nl2br }}</div>
+            <div class="text-nointervals">{{ advert.comment | nl2br | safe }}</div>
           </div>
           <div class="car-details col-xs-6">
             <div class="text-nointervals">
               <h3>Details</h3><br/>
               {% if advert.car_used %}
                 <p><b>Used:</b> {{ advert.car_used }}</p>
-              {% endif %}
-              {% if advert.car_year %}
-                <p><b>Year:</b> {{ advert.car_year }}</p>
               {% endif %}
               {% if advert.car_cost %}
                 <p><b>Cost:</b> {{ advert.car_cost }} RUB</p>

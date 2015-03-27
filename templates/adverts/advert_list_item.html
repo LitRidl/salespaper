@@ -1,0 +1,47 @@
+{% macro advert_list_item(advert, current_user) %}
+  <li class="list-group-item row">
+    <div class="col-xs-12">
+      <h4 class="row">
+        <a class="col-xs-8" href="{{ url_for('adverts.show_advert', advert_id=advert.id) }}">{{ advert.title | e }}</a>
+        <div class="col-xs-offset-1 col-xs-3">
+          {% if current_user.id == advert.user_id or current_user.is_admin() %}
+            <a class="edit-link" href="{{ url_for('adverts.advert_edit', advert_id=advert.id) }}">[edit]</a>
+          {% endif %}
+          {% if (current_user.id == advert.user_id or current_user.is_admin()) and not advert.closed %}
+            <a class="edit-link" href="{{ url_for('adverts.close_advert', advert_id=advert.id) }}">[close]</a>
+          {% endif %}
+          {% if (current_user.id == advert.user_id or current_user.is_admin()) and advert.approved %}
+            <a class="edit-link" href="{{ url_for('adverts.block_advert', advert_id=advert.id) }}">[block]</a>
+          {% endif %}
+        </div>
+      </h4>
+      <hr/>
+    </div>
+    {% if advert.car_used %}
+      <p class="feed-car-property"><b>Used:</b> {{ advert.car_used }}</p>
+    {% endif %}
+    {% if advert.car_cost %}
+      <p class="feed-car-property"><b>Cost:</b> {{ advert.car_cost }} RUB</p>
+    {% endif %}
+    {% if advert.car_mileage %}
+      <p class="feed-car-property"><b>Mileage:</b> {{ advert.car_mileage }} km</p>
+    {% endif %}
+    {% if advert.car_transmission %}
+      <p class="feed-car-property"><b>Transmission:</b> {{ advert.car_transmission }}</p>
+    {% endif %}
+    {% if advert.car_engine_power %}
+      <p class="feed-car-property"><b>Engine Power:</b> {{ advert.car_engine_power }} h.p.</p>
+    {% endif %}
+    {% if advert.car_engine_volume %}
+      <p class="feed-car-property"><b>Engine Volume:</b> {{ advert.car_engine_volume }} cube meters</p>
+    {% endif %}
+    {% if advert.car_fuel_consumption %}
+      <p class="feed-car-property"><b>Fuel consumption:</b> {{ advert.car_fuel_consumption }} liters/100 km</p>
+    {% endif %}
+    {% if advert.car_drive %}
+      <p class="feed-car-property"><b>Car drive:</b> {{ advert.car_drive }}</p>
+    {% endif %}
+    <hr/>
+    <p>{{ advert.comment | e | truncate(180) }}</p>
+  </li>
+{% endmacro %}

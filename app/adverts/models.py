@@ -28,7 +28,6 @@ class Advert(db.Model):
     # Car properties (!: no need for indexing columns with few values)
     car_used = Column(Enum(*constants.USED), default='used')
     car_cost = Column(Integer, index=True)
-    car_year = Column(Date)
     car_mileage = Column(Integer, index=True)
     car_transmission = Column(Enum(*constants.TRANSMISSION), default='automatic')
     car_engine_power = Column(Integer, index=True)
@@ -49,11 +48,10 @@ class Advert(db.Model):
 
         self.user_id = user_id
 
-    def set_car_data(self, used=None, cost=None, year=None, mileage=None, transmission=None,
+    def set_car_data(self, used=None, cost=None, mileage=None, transmission=None,
                      engine_power=None, engine_volume=None, fuel=None, drive=None):
         self.car_used = used
         self.car_cost = cost
-        self.car_year = year
         self.car_mileage = mileage
         self.car_transmission = transmission
         self.car_engine_power = engine_power
@@ -62,4 +60,4 @@ class Advert(db.Model):
         self.car_drive = drive
 
     def __repr__(self):
-        return '<Post %r>' % (self.body, )
+        return '<Post %r>' % (self.title, )

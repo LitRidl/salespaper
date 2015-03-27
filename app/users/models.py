@@ -43,7 +43,7 @@ class User(db.Model):
         return False
 
     def is_admin(self):
-        return self.role is 'admin'
+        return self.role == 'admin'
 
     def get_id(self):
         return unicode(self.id)

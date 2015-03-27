@@ -30,6 +30,9 @@ class UserAnonymous(AnonymousUserMixin):
     locale = app.config['BABEL_DEFAULT_LOCALE']
     timezone = app.config['BABEL_DEFAULT_TIMEZONE']
 
+    def is_admin(self):
+        return False
+
 # Login Manager
 login_manager = LoginManager()
 login_manager.init_app(app)

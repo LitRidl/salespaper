@@ -3,7 +3,15 @@
 
 {% block content %}
   {% if advert %}
-    <h1>Edit Advert</h1>
+    <h2>
+      Edit Advert
+      {% if (current_user.id == advert.user_id or current_user.is_admin()) and not advert.closed %}
+        <a class="edit-link" href="{{ url_for('adverts.close_advert', advert_id=advert.id) }}">[close]</a>
+      {% endif %}
+      {% if (current_user.id == advert.user_id or current_user.is_admin()) and advert.approved %}
+        <a class="edit-link" href="{{ url_for('adverts.block_advert', advert_id=advert.id) }}">[block]</a>
+      {% endif %}
+    </h2>
     <br/>
 
     <form class="form-advert col-xs-6" role="form" method="post" action="">
@@ -85,17 +93,6 @@
         {% if form.car_cost.errors %}
           <span class="error">
             {% for error in form.car_cost.errors %}
-              {{ error }}
-            {% endfor %}
-          </span>
-        {% endif %}
-      </div>
-      <div class="form-group">
-        <label for="">Car Year</label>
-        {{ form.car_year(class_="form-control", placeholder="Enter car year") }}
-        {% if form.car_year.errors %}
-          <span class="error">
-            {% for error in form.car_year.errors %}
               {{ error }}
             {% endfor %}
           </span>

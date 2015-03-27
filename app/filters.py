@@ -20,7 +20,8 @@ _paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
 @mod.app_template_filter('nl2br')
 @evalcontextfilter
 def nl2br(eval_ctx, value):
-    result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') for p in _paragraph_re.split(escape(value)))
-    if eval_ctx.autoescape:
-        result = Markup(result)
-    return result
+    return value.replace('\n', '<br/>\n')
+    # result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br\>\n') for p in _paragraph_re.split(escape(value)))
+    # if eval_ctx.autoescape:
+    #     result = Markup(result)
+    # return result

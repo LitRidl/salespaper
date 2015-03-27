@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% set active_page = "adverts" %}
+
+{% from "adverts/advert_list_item.html" import advert_list_item %}
+
+{% block css %}
+  {{ super() }}
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='adverts/sidebar.css') }}">
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='adverts/multiselect.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-xs-2" id="leftColumn">
+      {% include 'adverts/adverts_sidebar.html' %}
+    </div>
+    <div class="col-xs-10">
+      {% if adverts and adverts | length > 0 %}
+        <ul class="list-group">
+          {% for advert in adverts %}
+            {{ advert_list_item(advert, current_user) }}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <h3 class="text-center">No relevant adverts :(</h3>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block js_body %}
+  {{ super() }}
+  <script type="text/javascript" src="{{ url_for('static', filename='adverts/multiselect.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='adverts/starter.js') }}"></script>
+{% endblock %}

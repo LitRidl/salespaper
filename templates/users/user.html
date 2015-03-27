@@ -1,13 +1,31 @@
 {% extends "base.html" %}
 {% set active_page = "users" %}
 
+{% from "adverts/advert_list_item.html" import advert_list_item %}
+
 {% block content %}
   <div>
     {% if user %}
-      <p>{{ user.nickname }} says:</p>
-      {% for advert in user.adverts %}
-        <p>At {{ advert.timestamp | datetime("dd MMMM yyyy") }}: {{ advert.body }}</p>
-      {% endfor %}
+        <h2>
+          {{ user.nickname }}
+          {% if current_user.is_admin() %}
+            <a class="edit-link" href="{{ url_for('users.block_user', user_id=user.id) }}">[block]</a>
+          {% endif %}
+        </h2>
+        <p>
+          Email: <a href="{{ user.email | e }}">{{ user.email | e }}</a>,
+          last activity at {{ user.last_req_date | datetime('dd.MM.yyyy') }}
+        </p>
+        <hr/>
+        {% if user.adverts and user.adverts | length > 0 %}
+          <ul class="list-group">
+            {% for advert in user.adverts %}
+              {{ advert_list_item(advert, current_user) }}
+            {% endfor %}
+          </ul>
+        {% else %}
+          <h3 class="text-center">User has no adverts</h3>
+        {% endif %}
     {% else %}
       <h3 class="text-center">No such user :(</h3>
     {% endif %}

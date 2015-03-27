@@ -1,0 +1,140 @@
+<ul class="nav nav-stacked" id="sidebar">
+  <form class="form-advert" role="form" method="post" action="">
+    {{ form.csrf_token }}
+
+    <div class="form-group">
+      <label for="">Car Used</label><br/>
+      {{ form.car_used(class_="form-control") }}
+      {% if form.car_used.errors %}
+        <span class="error">
+          {% for error in form.car_used.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="">Car Cost</label>
+      {{ form.car_cost_min(class_="form-control", placeholder="Enter min cost") }}
+      {% if form.car_cost_min.errors %}
+        <span class="error">
+          {% for error in form.car_cost_min.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+      {{ form.car_cost_max(class_="form-control", placeholder="Enter max cost") }}
+      {% if form.car_cost_max.errors %}
+        <span class="error">
+          {% for error in form.car_cost_max.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="">Car Mileage</label>
+      {{ form.car_mileage_min(class_="form-control", placeholder="Enter min mileage") }}
+      {% if form.car_mileage_min.errors %}
+        <span class="error">
+          {% for error in form.car_mileage_min.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+      {{ form.car_mileage_max(class_="form-control", placeholder="Enter max mileage") }}
+      {% if form.car_mileage_max.errors %}
+        <span class="error">
+          {% for error in form.car_mileage_max.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="">Car Transmission</label><br/>
+      {{ form.car_transmission(class_="form-control") }}
+      {% if form.car_transmission.errors %}
+        <span class="error">
+          {% for error in form.car_transmission.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Engine Power</label>
+      {{ form.car_engine_power_min(class_="form-control", placeholder="Enter min power (h.p.)") }}
+      {% if form.car_engine_power_min.errors %}
+        <span class="error">
+          {% for error in form.car_engine_power_min.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+      {{ form.car_engine_power_max(class_="form-control", placeholder="Enter max power (h.p.)") }}
+      {% if form.car_engine_power_max.errors %}
+        <span class="error">
+          {% for error in form.car_engine_power_max.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="">Car Engine Volume</label>
+      {{ form.car_engine_volume_min(class_="form-control", placeholder="Enter min volume (cube meters)") }}
+      {% if form.car_engine_volume_min.errors %}
+        <span class="error">
+          {% for error in form.car_engine_volume_min.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+      {{ form.car_engine_volume_max(class_="form-control", placeholder="Enter max volume (cube meters)") }}
+      {% if form.car_engine_volume_max.errors %}
+        <span class="error">
+          {% for error in form.car_engine_volume_max.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Fuel Consumption</label>
+      {{ form.car_fuel_consumption_min(class_="form-control", placeholder="Enter fuel consumption (liters/100 km)") }}
+      {% if form.car_fuel_consumption_min.errors %}
+        <span class="error">
+          {% for error in form.car_fuel_consumption_min.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+      {{ form.car_fuel_consumption_max(class_="form-control", placeholder="Enter fuel consumption (liters/100 km)") }}
+      {% if form.car_fuel_consumption_max.errors %}
+        <span class="error">
+          {% for error in form.car_fuel_consumption_max.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="">Car Drive</label><br/>
+      {{ form.car_drive(class_="form-control") }}
+      {% if form.car_drive.errors %}
+        <span class="error">
+          {% for error in form.car_drive.errors %}
+            {{ error }}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
+</ul>

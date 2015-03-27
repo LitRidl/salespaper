@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
 
-from app import db, bcrypt
+from app import db, bcrypt, login_manager
 
 from app.users.forms import LoginForm, RegisterForm
 from app.users.models import User
@@ -16,28 +16,17 @@ mod = Blueprint('users', __name__, url_prefix='/users')
 
 @mod.route('/')
 @mod.route('/index')
+@login_required
 def index():
-    user = {'nickname': 'Michael'}
-    posts = [
-        {
-            'author': {'nickname': 'John'},
-            'body': u'Beautiful day in Portland!'
-        },
-        {
-            'author': {'nickname': 'Susan'},
-            'body': u'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('users/home.html', title=u'Users', user=user, posts=posts)
+    user = current_user
+    return render_template('users/home.html', title=user.nickname,  user=user, adverts=user.adverts)
 
 
 @mod.route('/home')
 @login_required
 def home():
     user = current_user
-    adverts = user.adverts
-
-    return render_template('users/home.html', title=user.nickname,  user=user, adverts=adverts)
+    return render_template('users/home.html', title=user.nickname,  user=user, adverts=user.adverts)
 
 
 @mod.route('/<int:user_id>')
@@ -45,7 +34,25 @@ def home():
 def show_user(user_id):
     user = User.query.get(user_id)
     title = u'No such user' if user is None else user.nickname
+
+    if current_user.id != user.id and not current_user.is_admin():
+        return login_manager.unauthorized()
+
     return render_template('users/user.html', title=title,  user=user)
+
+
+@mod.route('/<int:advert_id>/block')
+@login_required
+def block_user(user_id):
+    if not current_user.is_admin():
+        return render_template('errors/404.html'), 404
+    else:
+        user = User.query.get(user_id)
+        if user:
+            user.active = False
+            db.session.add(user)
+            db.session.commit()
+        return redirect(url_for('users.show_user', user_id=user.id))
 
 
 @mod.route('/register/', methods=['GET', 'POST'])   # pragma: no cover
@@ -63,7 +70,7 @@ def register():
             if email_taken:
                 errors.append(u'E-mail already registered. Please try another one')
         else:
-            user = User(form.nickname.data, form.password.data, form.email.data, form.email.data)
+            user = User(form.nickname.data, form.password.data, form.email.data)
             db.session.add(user)
             db.session.commit()
             login_user(user)
@@ -83,7 +90,7 @@ def login():
 
             if user is not None and bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember_me.data)
-                return redirect(url_for('.show_user', user_id=user.id))
+                return redirect(request.args.get('next') or url_for('.show_user', user_id=user.id))
             else:
                 errors.append(u'Invalid credentials. Please try again')
 
