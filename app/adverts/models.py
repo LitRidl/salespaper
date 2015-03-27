@@ -36,5 +36,30 @@ class Advert(db.Model):
     car_fuel_consumption = Column(Integer, index=True)
     car_drive = Column(Enum(*constants.DRIVE), default='front')
 
+    def __init__(self, user_id, title, comment, phone=None, place=None, approved=True, closed=False):
+        self.title = title
+        self.comment = comment
+
+        self.phone = phone
+        self.place = None
+
+        self.timestamp = datetime.utcnow()
+        self.approved = approved
+        self.closed = closed
+
+        self.user_id = user_id
+
+    def set_car_data(self, used=None, cost=None, year=None, mileage=None, transmission=None,
+                     engine_power=None, engine_volume=None, fuel=None, drive=None):
+        self.car_used = used
+        self.car_cost = cost
+        self.car_year = year
+        self.car_mileage = mileage
+        self.car_transmission = transmission
+        self.car_engine_power = engine_power
+        self.car_engine_volume = engine_volume
+        self.car_fuel_consumption = fuel
+        self.car_drive = drive
+
     def __repr__(self):
         return '<Post %r>' % (self.body, )

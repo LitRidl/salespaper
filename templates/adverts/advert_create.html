@@ -5,7 +5,7 @@
   <h1>Create New Advert</h1>
   <br/>
 
-  <form class="form-advert" role="form" method="post" action="">
+  <form class="form-advert col-xs-6" role="form" method="post" action="">
     {{ form.csrf_token }}
 
     <div class="form-group">
@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
       <label for="">Comment</label>
-      {{ form.comment(class_="form-control", placeholder="Enter advert comment") }}
+      {{ form.comment(class_="form-control", rows=5, placeholder="Enter advert comment") }}
       {% if form.comment.errors %}
         <span class="error">
           {% for error in form.comment.errors %}
@@ -49,17 +49,6 @@
       {% if form.place.errors %}
         <span class="error">
           {% for error in form.place.errors %}
-            {{ error }}
-          {% endfor %}
-        </span>
-      {% endif %}
-    </div>
-    <div class="form-group">
-      <label for="">Advert closed?</label>
-      {{ form.closed(class_="form-control") }}
-      {% if form.closed.errors %}
-        <span class="error">
-          {% for error in form.closed.errors %}
             {{ error }}
           {% endfor %}
         </span>
@@ -171,7 +160,7 @@
       {% endif %}
     </div>
 
-    <button class="btn btn-success" type="submit">Create!</button>
+    <button class="btn btn-success" type="submit">Create</button>
   </form>
 
 {% endblock %}
