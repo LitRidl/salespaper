@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
-from flask import abort
 from flask import Blueprint, request, render_template, redirect, url_for
 from flask.ext.login import login_required, current_user
 
@@ -8,6 +6,7 @@ from app import db
 
 from app.adverts.forms import AdvertForm, SearchForm
 from app.adverts.models import Advert
+from sqlalchemy import and_
 
 
 mod = Blueprint('adverts', __name__, url_prefix='/adverts')
@@ -17,9 +16,8 @@ mod = Blueprint('adverts', __name__, url_prefix='/adverts')
 @mod.route('/index', methods=['GET', 'POST'])
 def index():
     form = SearchForm(request.form)
-    q = Advert.query
+    q = Advert.query.filter(and_(Advert.closed == False, Advert.approved == True))
 
-    queries = []
     if form.validate_on_submit():
         if form.car_used.data:
             q = q.filter(Advert.car_used.in_(form.car_used.data))

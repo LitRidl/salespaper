@@ -8,7 +8,7 @@
       {% if (current_user.id == advert.user_id or current_user.is_admin()) and not advert.closed %}
         <a class="edit-link" href="{{ url_for('adverts.close_advert', advert_id=advert.id) }}">[close]</a>
       {% endif %}
-      {% if (current_user.id == advert.user_id or current_user.is_admin()) and advert.approved %}
+      {% if current_user.is_admin() and advert.approved %}
         <a class="edit-link" href="{{ url_for('adverts.block_advert', advert_id=advert.id) }}">[block]</a>
       {% endif %}
     </h2>

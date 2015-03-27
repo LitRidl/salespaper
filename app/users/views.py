@@ -90,7 +90,7 @@ def login():
 
             if user is not None and bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember_me.data)
-                return redirect(request.args.get('next') or url_for('.show_user', user_id=user.id))
+                return redirect(request.args.get('next') or url_for('users.home'))
             else:
                 errors.append(u'Invalid credentials. Please try again')
 

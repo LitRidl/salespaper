@@ -1,7 +1,7 @@
-{% set navigation_bar = [
-  (url_for('adverts.index'), 'adverts', 'Adverts'),
-  (url_for('adverts.advert_create'), 'adverts', 'New Advert')
-] -%}
+{#{% set navigation_bar = [#}
+{#  (url_for('adverts.index'), 'adverts', 'Adverts'),#}
+{#  (url_for('adverts.advert_create'), 'adverts', 'New Advert')#}
+{#] -%}#}
 {% set active_page = active_page | default('adverts') -%}
 
 <!DOCTYPE html>
@@ -46,8 +46,12 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               {% if not current_user.is_authenticated() %}
-                <li><a href="{{ url_for('users.login') }}">Login</a></li>
-                <li><a href="{{ url_for('users.register') }}">Register</a></li>
+                <li {% if active_page == 'user_login' %} class="active" {% endif %}>
+                  <a href="{{ url_for('users.login') }}">Login</a>
+                </li>
+                <li {% if active_page == 'user_register' %} class="active" {% endif %}>
+                  <a href="{{ url_for('users.register') }}">Register</a>
+                </li>
               {% else %}
                 <li {% if active_page == 'users' %} class="active" {% endif %}>
                   <a href="{{ url_for('users.home') }}">Profile</a>
