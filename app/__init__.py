@@ -5,7 +5,7 @@ from flask.ext.babel import Babel
 import os
 import wtforms_json
 
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, AnonymousUserMixin, current_user
 from flask.ext.bcrypt import Bcrypt
@@ -109,3 +109,10 @@ app.register_blueprint(Users)
 # Adverts
 from app.adverts.views import mod as Adverts
 app.register_blueprint(Adverts)
+
+
+# Index route
+@app.route('/')
+@app.route('/index')
+def app_index():
+    return redirect(url_for('adverts.index'))

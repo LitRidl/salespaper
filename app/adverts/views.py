@@ -2,7 +2,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 from flask.ext.login import login_required, current_user
 
-from app import db
+from app import db, app
 
 from app.adverts.forms import AdvertForm, SearchForm
 from app.adverts.models import Advert
