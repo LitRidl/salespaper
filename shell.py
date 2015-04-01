@@ -18,7 +18,8 @@ from app.users.models import *
 from app.adverts.models import *
 
 
-def db_create_admin():
+def create_admin():
+    '''Adds User('LitRidl', '123456', 'litridl@gmail.com', role='admin') to database'''
     admin = User('LitRidl', '123456', 'litridl@gmail.com', role='admin')
     admin.active = True
     try:
@@ -28,8 +29,11 @@ def db_create_admin():
         print(e)
         db.session.rollback()
 
-
-os.environ['PYTHONINSPECT'] = 'True'
+try:
+    import IPython
+    IPython.embed()
+except ImportError:
+    os.environ['PYTHONINSPECT'] = 'True'
 
 ctx = app.test_request_context()
 ctx.push()

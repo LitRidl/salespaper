@@ -26,7 +26,6 @@ class Config(object):
     BABEL_DEFAULT_TIMEZONE = 'Europe/Moscow'
 
 
-
 class DevelopmentConfig(Config):
     DEBUG = True
 
