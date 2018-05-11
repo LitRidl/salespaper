@@ -17,13 +17,13 @@ from app import *
 from app.users.models import *
 from app.adverts.models import *
 
-
-def create_admin():
-    '''Adds User('LitRidl', '123456', 'litridl@gmail.com', role='admin') to database'''
-    admin = User('LitRidl', '123456', 'litridl@gmail.com', role='admin')
-    admin.active = True
+# Example: db_create_user('ipetrov', '123456', 'ipetrov98@gmail.com', 'admin')
+def create_user(username, password, email, role):
+    '''Adds User(username, password, email, role) to database'''
+    user = User(username, password, email, role=role)
+    user.active = True
     try:
-        db.session.add(admin)
+        db.session.add(user)
         db.session.commit()
     except SQLAlchemyError as e:
         print(e)

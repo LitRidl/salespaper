@@ -3,19 +3,20 @@
 
 ## Инструкция
 1. git clone git@github.com:LitRidl/salespaper.git
-2. Установить Python и связанные утилиты:
+2. При необходимости установить Python 2.7 и связанные утилиты:
   1. sudo apt-get install python-setuptools python-dev build-essential
   2. sudo easy_install pip
   3. sudo pip install virtualenv
 3. Перейти в директорию проекта (cd salespaper)
-4. Создать виртуальное окружение: virtualenv env
-5. Разрешить python-зависимости: pip install dependencies.txt
-6. Подготовить БД
-  1. Запустить python shell.py
+4. Создать виртуальное окружение: virtualenv -p python2.7 ENV
+5. Активировать виртуальное окружение: . ENV/bin/activate
+6. Разрешить python-зависимости: pip install dependencies.txt
+7. Подготовить БД
+  1. Запустить консоль администратора python shell.py
   2. Командой db.create_all() создать БД
-  3. Командой db_create_admin() создатьпользователя-администратора
-7. Запустить сервер: python run.py
-8. Перейти в браузере по адресу http://localhost:5000/
+  3. Командой create_user('ipetrov', '123456', 'ipetrov98@gmail.com', 'admin') создать пользователя-администратора
+8. Запустить сервер: python run.py
+9. Перейти в браузере по адресу http://localhost:5000/
 
 ## Исходная постановка задачи
 Сайт купли-продажи авто:
@@ -35,4 +36,3 @@
 - пользователь может создавать, изменять и закрывать свои объявления.
 - администратор дополнительно может удалять, изменять и блокировать чужие объявления.
 - администратор может блокировать других пользователей и просматривать их профили.
-
